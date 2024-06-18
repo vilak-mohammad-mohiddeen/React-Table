@@ -1,15 +1,17 @@
 const express= require('express');
-const userRouter=require('./routes/userRoutes');
 const cors=require('cors')
 const mongoose=require('mongoose');
+const dotenv=require('dotenv');
 const app=express();
 
 app.use(cors());
 
+dotenv.config({path:'./configure.env'})
 
+const userRouter=require('./routes/userRoutes');
 app.use('/users',userRouter);
 
-const DB = "mongodb+srv://Mohiddeen:Moinzaheer@userscardata.ftyxdic.mongodb.net/?retryWrites=true&w=majority&appName=UsersCarData";
+const DB = process.env.DATABASE.replace("<password>",process.env.DATABASE_PASSWORD);
   
  
  
