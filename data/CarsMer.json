@@ -1,0 +1,290 @@
+
+[
+    {
+        "full_name": "Alice Johnson",
+        "mail": "alice.johnson@example.com",
+        "car_model": "Civic",
+        "company": "Honda",
+        "pricing": 20000
+    },
+    {
+        "full_name": "Bob Smith",
+        "mail": "bob.smith@example.com",
+        "car_model": "Corolla",
+        "company": "Toyota",
+        "pricing": 18000
+    },
+    {
+        "full_name": "Carol Williams",
+        "mail": "carol.williams@example.com",
+        "car_model": "Model 3",
+        "company": "Tesla",
+        "pricing": 35000
+    },
+    {
+        "full_name": "David Brown",
+        "mail": "david.brown@example.com",
+        "car_model": "Mustang",
+        "company": "Ford",
+        "pricing": 27000
+    },
+    {
+        "full_name": "Emma Davis",
+        "mail": "emma.davis@example.com",
+        "car_model": "Accord",
+        "company": "Honda",
+        "pricing": 24000
+    },
+    {
+        "full_name": "Frank Miller",
+        "mail": "frank.miller@example.com",
+        "car_model": "Camry",
+        "company": "Toyota",
+        "pricing": 23000
+    },
+    {
+        "full_name": "Grace Wilson",
+        "mail": "grace.wilson@example.com",
+        "car_model": "Model S",
+        "company": "Tesla",
+        "pricing": 70000
+    },
+    {
+        "full_name": "Henry Martinez",
+        "mail": "henry.martinez@example.com",
+        "car_model": "F-150",
+        "company": "Ford",
+        "pricing": 30000
+    },
+    {
+        "full_name": "Ivy Garcia",
+        "mail": "ivy.garcia@example.com",
+        "car_model": "CR-V",
+        "company": "Honda",
+        "pricing": 25000
+    },
+    {
+        "full_name": "Jack Martinez",
+        "mail": "jack.martinez@example.com",
+        "car_model": "RAV4",
+        "company": "Toyota",
+        "pricing": 26000
+    },
+    {
+        "full_name": "Kathy Anderson",
+        "mail": "kathy.anderson@example.com",
+        "car_model": "Model X",
+        "company": "Tesla",
+        "pricing": 80000
+    },
+    {
+        "full_name": "Leo Thomas",
+        "mail": "leo.thomas@example.com",
+        "car_model": "Explorer",
+        "company": "Ford",
+        "pricing": 32000
+    },
+    {
+        "full_name": "Mia White",
+        "mail": "mia.white@example.com",
+        "car_model": "Pilot",
+        "company": "Honda",
+        "pricing": 35000
+    },
+    {
+        "full_name": "Nathan Harris",
+        "mail": "nathan.harris@example.com",
+        "car_model": "Highlander",
+        "company": "Toyota",
+        "pricing": 34000
+    },
+    {
+        "full_name": "Olivia King",
+        "mail": "olivia.king@example.com",
+        "car_model": "Model Y",
+        "company": "Tesla",
+        "pricing": 50000
+    },
+    {
+        "full_name": "Paul Lee",
+        "mail": "paul.lee@example.com",
+        "car_model": "Escape",
+        "company": "Ford",
+        "pricing": 24000
+    },
+    {
+        "full_name": "Quinn Young",
+        "mail": "quinn.young@example.com",
+        "car_model": "Fit",
+        "company": "Honda",
+        "pricing": 17000
+    },
+    {
+        "full_name": "Ryan Scott",
+        "mail": "ryan.scott@example.com",
+        "car_model": "Tacoma",
+        "company": "Toyota",
+        "pricing": 28000
+    },
+    {
+        "full_name": "Sophia Allen",
+        "mail": "sophia.allen@example.com",
+        "car_model": "Cybertruck",
+        "company": "Tesla",
+        "pricing": 40000
+    },
+    {
+        "full_name": "Tom Hernandez",
+        "mail": "tom.hernandez@example.com",
+        "car_model": "Bronco",
+        "company": "Ford",
+        "pricing": 35000
+    },
+    {
+        "full_name": "Uma Clark",
+        "mail": "uma.clark@example.com",
+        "car_model": "Odyssey",
+        "company": "Honda",
+        "pricing": 30000
+    },
+    {
+        "full_name": "Victor Lewis",
+        "mail": "victor.lewis@example.com",
+        "car_model": "Avalon",
+        "company": "Toyota",
+        "pricing": 36000
+    },
+    {
+        "full_name": "Wendy Robinson",
+        "mail": "wendy.robinson@example.com",
+        "car_model": "Roadster",
+        "company": "Tesla",
+        "pricing": 200000
+    },
+    {
+        "full_name": "Xavier Walker",
+        "mail": "xavier.walker@example.com",
+        "car_model": "Ranger",
+        "company": "Ford",
+        "pricing": 27000
+    },
+    {
+        "full_name": "Yvonne Hall",
+        "mail": "yvonne.hall@example.com",
+        "car_model": "Passport",
+        "company": "Honda",
+        "pricing": 32000
+    },
+    {
+        "full_name": "Zachary Adams",
+        "mail": "zachary.adams@example.com",
+        "car_model": "Tundra",
+        "company": "Toyota",
+        "pricing": 35000
+    },
+    {
+        "full_name": "Amy Carter",
+        "mail": "amy.carter@example.com",
+        "car_model": "Civic",
+        "company": "Honda",
+        "pricing": 22000
+    },
+    {
+        "full_name": "Brian Evans",
+        "mail": "brian.evans@example.com",
+        "car_model": "Corolla",
+        "company": "Toyota",
+        "pricing": 19000
+    },
+    {
+        "full_name": "Cindy Nelson",
+        "mail": "cindy.nelson@example.com",
+        "car_model": "Model 3",
+        "company": "Tesla",
+        "pricing": 37000
+    },
+    {
+        "full_name": "Danny Ward",
+        "mail": "danny.ward@example.com",
+        "car_model": "Mustang",
+        "company": "Ford",
+        "pricing": 29000
+    },
+    {
+        "full_name": "Eva Campbell",
+        "mail": "eva.campbell@example.com",
+        "car_model": "Accord",
+        "company": "Honda",
+        "pricing": 26000
+    },
+    {
+        "full_name": "Frank Rodriguez",
+        "mail": "frank.rodriguez@example.com",
+        "car_model": "Camry",
+        "company": "Toyota",
+        "pricing": 24000
+    },
+    {
+        "full_name": "Grace Lewis",
+        "mail": "grace.lewis@example.com",
+        "car_model": "Model S",
+        "company": "Tesla",
+        "pricing": 72000
+    },
+    {
+        "full_name": "Henry Martinez",
+        "mail": "henry.martinez@example.com",
+        "car_model": "F-150",
+        "company": "Ford",
+        "pricing": 32000
+    },
+    {
+        "full_name": "Ivy Garcia",
+        "mail": "ivy.garcia@example.com",
+        "car_model": "CR-V",
+        "company": "Honda",
+        "pricing": 27000
+    },
+    {
+        "full_name": "Jack Martinez",
+        "mail": "jack.martinez@example.com",
+        "car_model": "RAV4",
+        "company": "Toyota",
+        "pricing": 28000
+    },
+    {
+        "full_name": "Kathy Anderson",
+        "mail": "kathy.anderson@example.com",
+        "car_model": "Model X",
+        "company": "Tesla",
+        "pricing": 82000
+    },
+    {
+        "full_name": "Leo Thomas",
+        "mail": "leo.thomas@example.com",
+        "car_model": "Explorer",
+        "company": "Ford",
+        "pricing": 34000
+    },
+    {
+        "full_name": "Mia White",
+        "mail": "mia.white@example.com",
+        "car_model": "Pilot",
+        "company": "Honda",
+        "pricing": 37000
+    },
+    {
+        "full_name": "Nathan Harris",
+        "mail": "nathan.harris@example.com",
+        "car_model": "Highlander",
+        "company": "Toyota",
+        "pricing": 36000
+    },
+    {
+        "full_name": "Olivia King",
+        "mail": "olivia.king@example.com",
+        "car_model": "Model Y",
+        "company":"Tesla",
+        "pricing":25000
+    }
+]
