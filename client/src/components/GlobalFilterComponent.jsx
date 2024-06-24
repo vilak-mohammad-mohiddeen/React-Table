@@ -1,13 +1,23 @@
+import React from "react";
 
+export function GlobalFilterComponent({ filter, setFilter }) {
+  const handleOnChange = (e) => {
+    const value = e.target.value || '';
+    setFilter(value);
+    console.log(value);
+  };
 
-export function GlobalFilterComponent({globalFilter,setGlobalFilter}){
-
-    return (
-        <>
-        <span>
-            <input name="search" type="text" value={globalFilter || ''} onChange={(e)=>setGlobalFilter(e.target.value)} />
-            
-        </span>
-        </>
-    );
+  return (
+    <>
+      <span>
+        Search{" "}
+        <input
+          name="search"
+          type="text"
+          value={filter}
+          onChange={handleOnChange}
+        />
+      </span>
+    </>
+  );
 }

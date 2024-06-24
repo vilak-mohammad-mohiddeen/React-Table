@@ -2,11 +2,15 @@ const express= require('express');
 const cors=require('cors')
 const mongoose=require('mongoose');
 const dotenv=require('dotenv');
+const bodyParser=require('body-parser');
 const app=express();
 
 app.use(cors());
 
 dotenv.config({path:'./configure.env'})
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 const userRouter=require('./routes/userRoutes');
 app.use('/users',userRouter);
