@@ -64,6 +64,7 @@ export default function ReactTableComponent() {
     const result = await res.json();
     setFilteredData(result);
     setPageCount(1);
+    //need to se page Index as well
   };
 
   const fetchData = async ({ pageIndex, pageSize }) => {
@@ -149,7 +150,7 @@ export default function ReactTableComponent() {
           | Go to page{" "}
           <input
             type="number"
-            defaultValue={pageIndex + 1}
+            value={pageIndex + 1}
             onChange={(e) => {
               const n = e.target.value ? Number(e.target.value) - 1 : 0;
               gotoPage(n);
