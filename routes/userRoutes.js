@@ -7,7 +7,7 @@ const filterRouter=require('./filterRouter');
 router.use('/filter', filterRouter);
 // router.get('/filter',userController.getFilteredUsers)
 router.get('/:id', userController.getUserById);
-router.get('/', userController.getAllUsers);
+router.get('/', userController.getAllUsers2);
 
 
 

@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 const userRouter=require('./routes/userRoutes');
 app.use('/users',userRouter);
 
-const DB = process.env.DATABASE.replace("<password>",process.env.DATABASE_PASSWORD);
+const DB = process.env.DATABASE.replace("<password>",process.env.DATABASE_PASSWORD).replace("<database>",'VeroDB');
   
  
  
