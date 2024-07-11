@@ -1,44 +1,21 @@
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { RootComponent } from './pages/RootComponent';
-import ReactTableComponent from './components/ReactTableComponent';
-import { SignupComponent } from './pages/SignupComponent';
-import { HomeComponent } from './pages/HomeComponent';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import store from './store/react-redux';
+// import '../node_modules/bootstrap/dist/css/bootstrap-grid.min.css'
 import './App.css'
-import { ErrorPage } from './pages/ErrorPage';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootComponent />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <HomeComponent />
-      },
-      {
-        path: 'table',
-        element: <ReactTableComponent />
-      },
-      {
-        path: 'signup',
-        element: <SignupComponent />
-      }
-    ]
-  }
-
-]);
+import { ReactTableComponent } from './components/ReactTableComponent'
+import { useEffect } from 'react';
 
 function App() {
-
+  
+  
 
   return (
-    // <ReactTableComponent></ReactTableComponent>
-    <RouterProvider router={router}>
+    <Provider store={store}>
 
-    </RouterProvider>
-  );
+      <ReactTableComponent />
+    </Provider>
+  )
 }
 
 export default App

@@ -1,0 +1,24 @@
+
+
+
+.input-btn-group{
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.input-btn-group input{
+    height: 40px;
+    width: 300px;
+    border-radius: 8px;
+    
+}
+
+.input-button-group button {
+    
+    border: none;
+    padding: 10px 20px;
+   
+}
+

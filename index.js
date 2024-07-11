@@ -1,24 +1,18 @@
-const express= require('express');
-const cors=require('cors')
 const mongoose=require('mongoose');
+const bodyParser = require('body-parser');
+const express=require('express');
+const cors=require('cors');
 const dotenv=require('dotenv');
-const bodyParser=require('body-parser');
+dotenv.config({path:'./config.env'});
 const app=express();
-
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.use(cors());
 
-dotenv.config({path:'./configure.env'})
+const userCarRouter=require('./router/userCarRouter');
+app.use('/table',userCarRouter);
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
-
-const userRouter=require('./routes/userRoutes');
-app.use('/users',userRouter);
-
-const DB = process.env.DATABASE.replace("<password>",process.env.DATABASE_PASSWORD).replace("<database>",'VeroDB');
-  
- 
- 
+const DB=process.env.DATABASE.replace('<password>',process.env.DATABASE_PASSWORD);
 mongoose.connect(DB)
 .then(() => {
     console.log('DB connection successful!')
@@ -28,6 +22,7 @@ mongoose.connect(DB)
     console.log(err); 
 });
 
-app.listen(4000,()=>{
-console.log("Runnig on port 4000");
-});
+app.listen(3000,()=>{
+
+    console.log("App is running...");
+})

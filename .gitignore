@@ -1,6 +1,3 @@
 node_modules
-configure.env
-aggregatepipeline.js
-uploadData.js
-cars1000.json
-users1000.json
+uploadSchemas.js
+config.env

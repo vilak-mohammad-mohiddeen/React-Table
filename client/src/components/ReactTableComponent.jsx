@@ -1,175 +1,212 @@
-import React, { useEffect, useState } from "react";
-import { useTable, useGlobalFilter, usePagination } from "react-table";
-import { GlobalFilterComponent } from "./GlobalFilterComponent";
+import React, { Fragment, useEffect, useState } from 'react';
+import { useTable, usePagination } from 'react-table';
+import { useSelector, useDispatch } from 'react-redux';
+import { tableActions } from '../store/react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesLeft, faAnglesRight, faArrowLeftLong, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+import './reactTable.css';
+import LoadingIconComponent from './LoadingIconComponent/LoadingIconComponent';
+import GlobalFilterComponent from './GlobalFilterComponent/GlobalFilterComponent';
 
-export default function ReactTableComponent() {
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "Full Name",
-        accessor: "full_name",
-      },
-      {
-        Header: "E-mail",
-        accessor: "mail",
-      },
-      {
-        Header: "Gender",
-        accessor: "gender",
-      },
-      {
-        Header: "Phone Number",
-        accessor: "phone_number",
-      },
-      {
-        Header: "Address",
-        accessor: "address",
-      },
-      {
-        Header: "Bank Balance",
-        accessor: "bank_balance",
-      },
-      {
-        Header: "Credit Card",
-        accessor: "credit_card",
-        Cell: ({ value }) => (value ? "Yes" : "No"),
-      },
-      {
-        Header: "Car Model",
-        accessor: "car_model",
-      },
-      {
-        Header: "Company",
-        accessor: "company",
-      },
-      {
-        Header: "Pricing",
-        accessor: "pricing",
-      },
-    ],
-    []
-  );
+export function ReactTableComponent() {
+    const filter = useSelector((newState) => newState.globalfilter.filter);
+    const filtereddData = useSelector((newState) => newState.globalfilter.data);
+    const dispatch = useDispatch();
+    const pageIndex = useSelector((newState) => newState.table.pageIndex);
+    const pageCount = useSelector((newState) => newState.table.pageCount);
+    const pageSize = useSelector((newState) => newState.table.pageSize);
+    const data = useSelector((newState) => newState.table.data);
+    const totalRecords = useSelector((newState) => newState.table.totalRecords)
 
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
-  const [globalFilter, setGFilter] = useState('');
+    const columns = React.useMemo(
+        () => [
 
-  const fetchFilteredData = async (filter) => {
-    console.log("fetchFilteredData is called")
-    if (!filter) return;
-    const res = await fetch(
-      `http://localhost:4000/users/filter?search=${filter}`
+            {
+                Header: "First Name",
+                accessor: "first_name"
+            },
+            {
+                Header: "Last Name",
+                accessor: "last_name"
+            },
+            {
+                Header: "Age",
+                accessor: "age"
+            },
+            {
+                Header: "Mail",
+                accessor: "email"
+            },
+            {
+                Header: "Phone Number",
+                accessor: "phone_number"
+            },
+            {
+                Header: "Car",
+                accessor: "car_make"
+            },
+            {
+                Header: "Model",
+                accessor: "car_model"
+            },
+            {
+                Header: "Card",
+                accessor: "card_type"
+            },
+            {
+                Header: "Address",
+                accessor: "address"
+            },
+            {
+                Header: "City",
+                accessor: "city"
+            },
+            {
+                Header: "Country",
+                accessor: "country"
+            },
+        ], []
     );
-    const result = await res.json();
-    setFilteredData(result);
-    setPageCount(1);
-    //need to se page Index as well
-  };
 
-  const fetchData = async ({ pageIndex, pageSize }) => {
-    console.log("fetchData is called" , pageIndex,pageSize);
-    const res = await fetch(
-      `http://localhost:4000/users?page=${pageIndex}&limit=${pageSize}`
-    );
-    const result = await res.json();
-    setData(result.data);
-    setPageCount(Math.ceil(result.totalUsers / pageSize));
-  };
+    const [loading, setLoading] = useState(false);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    state,
-    setGlobalFilter,
-    gotoPage,
-    prepareRow,
-  } = useTable(
-    {
-      columns,
-      data:  globalFilter ? filteredData : data,
-      manualPagination: true,
-      pageCount,
-      initialState: { pageIndex: 0, pageSize: 5 },
-    },
-    useGlobalFilter,
-    usePagination
-  );
+    const { getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        page,
+        prepareRow } = useTable({
+            columns,
+            data: filter !== '' ? filtereddData : data,
+            manualPagination: true,
+            pageCount
+        },
+            usePagination
+        );
 
-  const { pageIndex, pageSize } = state;
 
-  useEffect(() => {
-    if (!globalFilter) {
-      fetchData({ pageIndex, pageSize });
-    } else {
-      fetchFilteredData(globalFilter);
+
+    async function fetchData() {
+        setLoading(true);
+        await fetch(`http://localhost:3000/table?index=${pageIndex}&limit=${pageSize}`).then(result => {
+            return result.json();
+        }).then(res => {
+            dispatch(tableActions.setData(res.data));
+            dispatch(tableActions.setCount(res.pageCount));
+            dispatch(tableActions.setTotalUsers(res.totalRecords));
+            setLoading(false);
+        }).catch(err => {
+            console.error("Couldn't fetch data", err);
+        });
+        setLoading(false);
     }
-  }, [pageIndex, pageSize, globalFilter]);
 
-  // useEffect(() => {
-  //   setGlobalFilter(globalFilter);
-  // }, [globalFilter, setGlobalFilter]);
+    useEffect(() => {
+        fetchData();
+    }, [pageIndex, pageSize])
 
-  return (
-    <>
-      <GlobalFilterComponent filter={globalFilter} setFilter={setGFilter} />
-      <table className="table" {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()} className="table-primary">
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div>
-        <span>
-          Page {pageIndex + 1} of {pageCount}{" "}
-        </span>
-        <span>
-          | Go to page{" "}
-          <input
-            type="number"
-            value={pageIndex + 1}
-            onChange={(e) => {
-              const n = e.target.value ? Number(e.target.value) - 1 : 0;
-              gotoPage(n);
-            }}
-          />
-        </span>
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {"<<"}
-        </button>
-        <button onClick={previousPage} disabled={!canPreviousPage}>
-          Previous
-        </button>{" "}
-        <button onClick={nextPage} disabled={!canNextPage}>
-          Next
-        </button>
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {">>"}
-        </button>
-      </div>
-    </>
-  );
+    function handleButtons(newIndex) {
+        dispatch(tableActions.setIndex(newIndex));
+    }
+
+    function handleDropdown(e) {
+        const value = Number(e.target.value) || 10;
+        dispatch(tableActions.setSize(value));
+    }
+
+
+
+
+    return (
+        <Fragment>
+            <div className='dropdown-filter'>
+                <GlobalFilterComponent />
+
+                <span className='dropdown'>
+                    <div className='dropdownDiv'>
+                        <label htmlFor="rDrop"> <strong>Select table size:</strong> </label>
+                        <select name="recordsDropdown" id="rDrop" onChange={handleDropdown}>
+                            <option value="10">10</option>
+                            <option value="20" disabled={pageIndex + 1 >= totalRecords / 20}>20</option>
+                            <option value="30" disabled={pageIndex + 1 >= totalRecords / 30}>30</option>
+                            <option value="40" disabled={pageIndex + 1 >= totalRecords / 40}>40</option>
+                            <option value="50" disabled={pageIndex + 1 >= totalRecords / 50}>50</option>
+                        </select>
+                    </div>
+
+                </span>
+
+            </div>
+
+
+            <div className="reactTable">
+
+                <table {...getTableProps()} className='table '>
+                    <thead>
+                        {headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id} className='table-primary'>
+                                {headerGroup.headers.map(column => (
+                                    <th {...column.getHeaderProps()} key={column.id} >
+                                        {column.render("Header")}
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+
+
+                    <tbody {...getTableBodyProps()}>
+                        {page.map(row => {
+                            prepareRow(row)
+                            return (
+                                <tr {...row.getRowProps()} key={row.id}>
+                                    {row.cells.map(cell => (
+                                        <td {...cell.getCellProps()} key={cell.column.id}>
+                                            {cell.render('Cell')}
+                                        </td>
+                                    ))}
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
+
+            {filter == '' && (
+                <Fragment>
+                    {loading && <div className='loadingDiv'>
+                        <LoadingIconComponent />
+                    </div>}
+                    <div className='container'>
+                        <span className='searchSpan'>
+                            Goto page{' '}
+                            <input
+                                type="number"
+                                onChange={(e) => {
+                                    const value = e.target.value > 0 ? e.target.value - 1 : 0;
+                                    dispatch(tableActions.setIndex(value));
+                                }}
+                            />
+                        </span>
+                    </div>
+                    <div className='container'>
+                        <span className='btn-group'>
+                            <button type='button' onClick={() => handleButtons(0)} disabled={pageIndex <= 0}>
+                                <FontAwesomeIcon icon={faAnglesLeft} />
+                            </button>
+                            <button type='button' onClick={() => handleButtons(pageIndex - 1)} disabled={pageIndex <= 0}>
+                                <FontAwesomeIcon icon={faArrowLeftLong} />
+                            </button>
+                            <p>{pageIndex + 1} of {pageCount}</p>
+                            <button type='button' onClick={() => handleButtons(pageIndex + 1)} disabled={pageIndex >= pageCount - 1}>
+                                <FontAwesomeIcon icon={faArrowRightLong} />
+                            </button>
+                            <button type='button' onClick={() => handleButtons(pageCount - 1)} disabled={pageIndex >= pageCount - 1}>
+                                <FontAwesomeIcon icon={faAnglesRight} />
+                            </button>
+                        </span>
+                    </div>
+                </Fragment>
+            )}
+        </Fragment>
+    );
 }
